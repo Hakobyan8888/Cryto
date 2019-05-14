@@ -1,37 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HuobiLibrary;
 
 namespace CryptoValue
 {
     class BestValue
     {
-        public string _maxUrl { get; set; }
-        public string _minUrl { get; set; }
-        public decimal _maxValue { get; set; }
-        public decimal _minValue { get; set; }
-                
-                
+        public string MaxUrl { get; set; }
+        public string MinUrl { get; set; }
+        public decimal MaxValue { get; set; }
+        public decimal MinValue { get; set; }
+
         public BestValue()
         {
-            _minValue = 0;
-            _maxValue = 0;
+            MinValue = 0;
+            MaxValue = 0;
         }
-
-
 
         public async Task<Dictionary<decimal, string>> CallMethods(string cases)
         {
             var values = new Dictionary<decimal, string>();
             Price price = new Price();
-
-            values.Add(await price.ValueBinance(), "binance.com");
-            values.Add(await price.ValueCoinEX(cases), "coinex.com");
-            values.Add(await price.ValueCEX(cases), "cex.io");
-            if (cases == "bid")
+            try
             {
-                values.Add(await price.ValueHuobi(), "huobi.com");
+                values.Add(await price.ValueBinance(), "binance.com");
+                values.Add(await price.ValueCoinEX(cases), "coinex.com");
+                values.Add(await price.ValueCEX(cases), "cex.io");
+
+                if (cases == "bid")
+                {
+                    values.Add(await price.ValueHuobi(), "huobi.com");
+                }
+            }
+            catch(Exception ex)
+            {
+                
             }
             return values;
         }
@@ -44,15 +47,15 @@ namespace CryptoValue
             {
                 foreach (var i in values.Result)
                 {
-                    if (_minValue == 0)
+                    if (MinValue == 0)
                     {
-                        _minValue = i.Key;
-                        _minUrl = i.Value;
+                        MinValue = i.Key;
+                        MinUrl = i.Value;
                     }
-                    if (_minValue > i.Key)
+                    if (MinValue > i.Key)
                     {
-                        _minValue = i.Key;
-                        _minUrl = i.Value;
+                        MinValue = i.Key;
+                        MinUrl = i.Value;
                     }
                 }
             }
@@ -60,13 +63,16 @@ namespace CryptoValue
             {
                 foreach (var i in values.Result)
                 {
-                    if (_maxValue < i.Key)
+                    if (MaxValue < i.Key)
                     {
-                        _maxValue = i.Key;
-                        _maxUrl = i.Value;
+                        MaxValue = i.Key;
+                        MaxUrl = i.Value;
                     }
                 }
             }
         }
+
+        public void
+
     }
 }
