@@ -6,8 +6,6 @@ namespace CryptoValue
 {
     class BestValue
     {
-        public string MaxUrl { get; set; }
-        public string MinUrl { get; set; }
         public decimal MaxValue { get; set; }
         public decimal MinValue { get; set; }
 
@@ -17,28 +15,23 @@ namespace CryptoValue
             MaxValue = 0;
         }
 
-        public async Task<Dictionary<decimal, string>> CallMethods(string cases)
+        public async Task<List<decimal>> CallMethods(string cases)
         {
-            var values = new Dictionary<decimal, string>();
+            var values = new List<decimal>();
             Price price = new Price();
-            try
-            {
-                values.Add(await price.ValueBinance(), "binance.com");
-                values.Add(await price.ValueCoinEX(cases), "coinex.com");
-                values.Add(await price.ValueCEX(cases), "cex.io");
+            values.Add(await price.ValueBinance());
+            values.Add(await price.ValueBitfinex(cases));
+            values.Add(await price.ValueBitforex(cases));
+            //values.Add(await price.ValueCoinEX(cases));
+            //values.Add(await price.ValueCEX(cases));
 
-                if (cases == "bid")
-                {
-                    values.Add(await price.ValueHuobi(), "huobi.com");
-                }
-            }
-            catch(Exception ex)
-            {
-                
-            }
+            //if (cases == "bid")
+            //{
+            //    values.Add(await price.ValueHuobi());
+            //}
             return values;
         }
-        
+
 
         public void SmallestHighest(string cases)
         {
@@ -49,30 +42,19 @@ namespace CryptoValue
                 {
                     if (MinValue == 0)
                     {
-                        MinValue = i.Key;
-                        MinUrl = i.Value;
+                        MinValue = i;
                     }
-                    if (MinValue > i.Key)
-                    {
-                        MinValue = i.Key;
-                        MinUrl = i.Value;
-                    }
+                    MinValue = Math.Min(MinValue, i);
                 }
             }
             if (cases == "bid")
             {
                 foreach (var i in values.Result)
                 {
-                    if (MaxValue < i.Key)
-                    {
-                        MaxValue = i.Key;
-                        MaxUrl = i.Value;
-                    }
+                    MaxValue = Math.Max(MaxValue, i);
                 }
             }
         }
-
-        public void
 
     }
 }

@@ -16,8 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BittrexLibrary">
-      <HintPath>..\..\HuobiLibrary\BittrexLibrary\bin\Debug\netstandard2.0\BittrexLibrary.dll</HintPath>
+    <Reference Include="BitfinexLibrary">
+      <HintPath>..\..\HuobiLibrary\BitfinexLibrary\bin\Debug\BitfinexLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Bitforex">
+      <HintPath>..\..\HuobiLibrary\Bitforex\bin\Debug\Bitforex.dll</HintPath>
     </Reference>
     <Reference Include="Cex.io">
       <HintPath>..\..\..\..\Downloads\Cex.io-Api-Client-master\src\Cex.io\bin\Debug\Cex.io.dll</HintPath>
@@ -27,6 +30,9 @@
     </Reference>
     <Reference Include="HuobiLibrary">
       <HintPath>..\..\HuobiLibrary\HuobiLibrary\bin\Debug\netstandard2.0\HuobiLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\Downloads\CryptoMarketApi-master\Api\HuobiApi\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
