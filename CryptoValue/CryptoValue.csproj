@@ -16,11 +16,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Bitbank">
+      <HintPath>..\..\HuobiLibrary\Bitbank\bin\Debug\Bitbank.dll</HintPath>
+    </Reference>
     <Reference Include="BitfinexLibrary">
       <HintPath>..\..\HuobiLibrary\BitfinexLibrary\bin\Debug\BitfinexLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Bitforex">
       <HintPath>..\..\HuobiLibrary\Bitforex\bin\Debug\Bitforex.dll</HintPath>
+    </Reference>
+    <Reference Include="BitmaxLibrary">
+      <HintPath>..\..\HuobiLibrary\BitmaxLibrary\bin\Debug\BitmaxLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Cex.io">
       <HintPath>..\..\..\..\Downloads\Cex.io-Api-Client-master\src\Cex.io\bin\Debug\Cex.io.dll</HintPath>

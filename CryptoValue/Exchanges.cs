@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CryptoValue
 {
-    class Exchanges
+    public class Exchanges
     {
         public decimal Profit { get; set; }
         public decimal Investment { get; set; }
@@ -16,11 +16,11 @@ namespace CryptoValue
 
         public Exchanges()
         {
-            Investment = 4.048m;
+            Investment = 8m;
             WithdrawalFeeFirst = 0.0005m;
             WithdrawalFeeSecond = 0.00032m;
-            TransactionFeeFirst = 0.001m;
-            TransactionFeeSecond = 0.001m;
+            TransactionFeeFirst = 0.0005m;
+            TransactionFeeSecond = 0.0005m;
         }
 
         public decimal Checker(decimal suspectedProfit)

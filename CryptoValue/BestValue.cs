@@ -22,13 +22,9 @@ namespace CryptoValue
             values.Add(await price.ValueBinance());
             values.Add(await price.ValueBitfinex(cases));
             values.Add(await price.ValueBitforex(cases));
-            //values.Add(await price.ValueCoinEX(cases));
-            //values.Add(await price.ValueCEX(cases));
+            values.Add(await price.ValueBitmax(cases));
+            values.Add(await price.ValueBitbank(cases));
 
-            //if (cases == "bid")
-            //{
-            //    values.Add(await price.ValueHuobi());
-            //}
             return values;
         }
 

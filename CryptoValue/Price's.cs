@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Binance;
-using CoinEx.Net;
 using BitforexLibrary;
-using CEXLibrary;
 using BitfinexLibrary;
+using BitmaxLibrary;
+using BitbankLibrary;
 
 namespace CryptoValue
 {
@@ -35,6 +35,26 @@ namespace CryptoValue
 
             decimal answer = bitforexClient.Market(assets.ETH, assets.BTC, AskOrBid);
             Console.WriteLine($"Bitforex is {AskOrBid} {answer}");
+            return answer;
+        }
+
+        public async Task<decimal> ValueBitmax(string AskOrBid)
+        {
+            BitmaxLibrary.Assets assets = new BitmaxLibrary.Assets();
+            BitmaxClient bitmaxClient = new BitmaxClient();
+
+            decimal answer = bitmaxClient.Market(assets.ETH, assets.BTC, AskOrBid);
+            Console.WriteLine($"Bitmax is {AskOrBid} {answer}");
+            return answer;
+        }
+
+        public async Task<decimal> ValueBitbank(string AskOrBid)
+        {
+            BitbankLibrary.Assets assets = new BitbankLibrary.Assets();
+            BitbankClient bitbankClient = new BitbankClient();
+
+            decimal answer = bitbankClient.Market(assets.ETH, assets.BTC, AskOrBid);
+            Console.WriteLine($"Bitbank is {AskOrBid} {answer}");
             return answer;
         }
 

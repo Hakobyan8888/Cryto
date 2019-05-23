@@ -27,7 +27,7 @@ namespace CryptoValue
                 Console.WriteLine($"The balance in First Bank before switching {bank1.BTCBalance} && {bank1.ETHBalance}");
                 Console.WriteLine($"The balance in Second Bank before switching {bank2.BTCBalance} && {bank2.ETHBalance}");
                 Console.WriteLine($"The expected Profit is {exchanges.Checker(suspectedProfit)}");
-                Console.WriteLine($"The full Balance before next transaction {bank1.BTCBalance + bank2.BTCBalance + (bank1.ETHBalance + bank2.ETHBalance) * 0.032m}");
+                Console.WriteLine($"The full Balance before next transaction {bank1.BTCBalance + bank2.BTCBalance + (bank1.ETHBalance + bank2.ETHBalance) * 0.0315m}");
                 if (exchanges.Checker(suspectedProfit) > 0)
                 {
                     bank1.BuyBTC(best.MaxBid);
@@ -37,7 +37,7 @@ namespace CryptoValue
                 }
                 Console.WriteLine($"The balance in First Bank after switching {bank1.BTCBalance} && {bank1.ETHBalance}");
                 Console.WriteLine($"The balance in Second Bank after switching {bank2.BTCBalance} && {bank2.ETHBalance}");
-                Console.WriteLine($"The full balance after transaction {bank1.BTCBalance + bank2.BTCBalance + (bank1.ETHBalance + bank2.ETHBalance) * 0.032m}");
+                Console.WriteLine($"The full balance after transaction {bank1.BTCBalance + bank2.BTCBalance + (bank1.ETHBalance + bank2.ETHBalance) * 0.0315m}");
                 Thread.Sleep(1500);
             }
         }
