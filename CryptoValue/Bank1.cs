@@ -10,7 +10,7 @@ namespace CryptoValue
         public decimal ETHBalance { get; set; } = 64m;
         public decimal WithdrawFeeBTC { get; set; } = 0.0005m;
         public decimal WithdrawFeeETH { get; set; } = 0.0025m;
-        public decimal TransactionFee { get; set; } = 0.05m;
+        public decimal TransactionFee { get; set; } = 0.1m;
 
 
         public void BuyBTC(decimal cost)

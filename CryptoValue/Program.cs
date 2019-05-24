@@ -17,15 +17,15 @@ namespace CryptoValue
                 bestValue.SmallestHighest("bid");
                 best.MaxBid = bestValue.MaxValue;
                 best.MinAsk = bestValue.MinValue;
-                Console.WriteLine($"Maximal value is in and it's {best.MaxBid}");
-                Console.WriteLine($"Minimal value is in and it's {best.MinAsk}");
+                best.MaxUrl = bestValue.MaxUrl;
+                best.MinUrl = bestValue.MinUrl;
+                Console.WriteLine($"Maximal value is in {best.MaxUrl} and it's {best.MaxBid}");
+                Console.WriteLine($"Minimal value is in {best.MinUrl} and it's {best.MinAsk}");
                 Console.WriteLine($"Difference is {(best.MaxBid - best.MinAsk) * 100 / best.MinAsk}%");
                 decimal suspectedProfit = (best.MaxBid - best.MinAsk) / best.MinAsk;
                 bestValue.MaxValue = 0;
                 bestValue.MinValue = 0;
                 Exchanges exchanges = new Exchanges();
-                Console.WriteLine($"The balance in First Bank before switching {bank1.BTCBalance} && {bank1.ETHBalance}");
-                Console.WriteLine($"The balance in Second Bank before switching {bank2.BTCBalance} && {bank2.ETHBalance}");
                 Console.WriteLine($"The expected Profit is {exchanges.Checker(suspectedProfit)}");
                 Console.WriteLine($"The full Balance before next transaction {bank1.BTCBalance + bank2.BTCBalance + (bank1.ETHBalance + bank2.ETHBalance) * 0.0315m}");
                 if (exchanges.Checker(suspectedProfit) > 0)

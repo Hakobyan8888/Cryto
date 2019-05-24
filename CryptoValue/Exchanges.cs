@@ -16,11 +16,11 @@ namespace CryptoValue
 
         public Exchanges()
         {
-            Investment = 8m;
+            Investment = 4m;
             WithdrawalFeeFirst = 0.0005m;
             WithdrawalFeeSecond = 0.00032m;
             TransactionFeeFirst = 0.0005m;
-            TransactionFeeSecond = 0.0005m;
+            TransactionFeeSecond = 0.001m;
         }
 
         public decimal Checker(decimal suspectedProfit)

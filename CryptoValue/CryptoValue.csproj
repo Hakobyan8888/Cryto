@@ -6,13 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alex75.BitstampApiClient" Version="0.4.1.10" />
     <PackageReference Include="Binance" Version="0.2.0-beta901" />
-    <PackageReference Include="Bittrex.Net" Version="3.1.0" />
-    <PackageReference Include="CCXT.NET" Version="1.3.3" />
-    <PackageReference Include="Coinbase" Version="5.1.1" />
-    <PackageReference Include="CoinEx.Net" Version="2.0.5" />
-    <PackageReference Include="LiquidQuoine.Net" Version="0.2.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,15 +21,6 @@
     </Reference>
     <Reference Include="BitmaxLibrary">
       <HintPath>..\..\HuobiLibrary\BitmaxLibrary\bin\Debug\BitmaxLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Cex.io">
-      <HintPath>..\..\..\..\Downloads\Cex.io-Api-Client-master\src\Cex.io\bin\Debug\Cex.io.dll</HintPath>
-    </Reference>
-    <Reference Include="CEXLibrary">
-      <HintPath>..\..\HuobiLibrary\CEXLibrary\bin\Debug\CEXLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="HuobiLibrary">
-      <HintPath>..\..\HuobiLibrary\HuobiLibrary\bin\Debug\netstandard2.0\HuobiLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\Downloads\CryptoMarketApi-master\Api\HuobiApi\bin\Debug\Newtonsoft.Json.dll</HintPath>

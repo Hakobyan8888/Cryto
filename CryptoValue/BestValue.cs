@@ -8,6 +8,8 @@ namespace CryptoValue
     {
         public decimal MaxValue { get; set; }
         public decimal MinValue { get; set; }
+        public string MaxUrl { get; set; }
+        public string MinUrl { get; set; }
 
         public BestValue()
         {
@@ -15,15 +17,15 @@ namespace CryptoValue
             MaxValue = 0;
         }
 
-        public async Task<List<decimal>> CallMethods(string cases)
+        public async Task<List<Tuple<decimal, string>>> CallMethods(string cases)
         {
-            var values = new List<decimal>();
+            var values = new List<Tuple<decimal, string>>();
             Price price = new Price();
-            values.Add(await price.ValueBinance());
-            values.Add(await price.ValueBitfinex(cases));
-            values.Add(await price.ValueBitforex(cases));
-            values.Add(await price.ValueBitmax(cases));
-            values.Add(await price.ValueBitbank(cases));
+            values.Add(Tuple.Create(await price.ValueBinance(), "Binance"));
+            values.Add(Tuple.Create(await price.ValueBitfinex(cases), "Bitfinex"));
+            values.Add(Tuple.Create(await price.ValueBitforex(cases), "Bitforex"));
+            values.Add(Tuple.Create(await price.ValueBitmax(cases), "Bitmax"));
+            values.Add(Tuple.Create(await price.ValueBitbank(cases), "Bitbank"));
 
             return values;
         }
@@ -38,16 +40,25 @@ namespace CryptoValue
                 {
                     if (MinValue == 0)
                     {
-                        MinValue = i;
+                        MinValue = i.Item1;
+                        MinUrl = i.Item2;
                     }
-                    MinValue = Math.Min(MinValue, i);
+                    if (MinValue > i.Item1)
+                    {
+                        MinValue = i.Item1;
+                        MinUrl = i.Item2;
+                    }
                 }
             }
             if (cases == "bid")
             {
                 foreach (var i in values.Result)
                 {
-                    MaxValue = Math.Max(MaxValue, i);
+                    if (MaxValue < i.Item1)
+                    {
+                        MaxValue = i.Item1;
+                        MaxUrl = i.Item2;
+                    }
                 }
             }
         }
