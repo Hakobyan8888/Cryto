@@ -30,7 +30,6 @@ namespace CryptoValue
             {
                 ETHBalance /= 2;
                 bank1.ETHBalance += ETHBalance - WithdrawFeeETH;
-
             }
             else if (BTCBalance > 0)
             {

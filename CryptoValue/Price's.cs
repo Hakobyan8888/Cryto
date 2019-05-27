@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Binance;
-using BitforexLibrary;
-using BitfinexLibrary;
-using BitmaxLibrary;
-using BitbankLibrary;
+using BitbankAPI;
+using BitfinexAPI;
+using BitforexAPI;
+using BitmaxAPI;
 
 namespace CryptoValue
 {
@@ -20,8 +20,8 @@ namespace CryptoValue
 
         public async Task<decimal> ValueBitfinex(string AskOrBid)
         {
-            BitfinexLibrary.Assets assets = new BitfinexLibrary.Assets();
-            BitfinexClient bitfinexClient = new BitfinexClient();
+            BitfinexAPI.Assets assets = new BitfinexAPI.Assets();
+            Tickers bitfinexClient = new Tickers();
 
             decimal answer = bitfinexClient.Market(assets.ETH, assets.BTC, AskOrBid);
             Console.WriteLine($"Bitfinex is {AskOrBid} {answer}");
@@ -30,7 +30,7 @@ namespace CryptoValue
 
         public async Task<decimal> ValueBitforex(string AskOrBid)
         {
-            BitforexLibrary.Assets assets = new BitforexLibrary.Assets();
+            BitforexAPI.Assets assets = new BitforexAPI.Assets();
             BitforexClient bitforexClient = new BitforexClient();
 
             decimal answer = bitforexClient.Market(assets.ETH, assets.BTC, AskOrBid);
@@ -40,7 +40,7 @@ namespace CryptoValue
 
         public async Task<decimal> ValueBitmax(string AskOrBid)
         {
-            BitmaxLibrary.Assets assets = new BitmaxLibrary.Assets();
+            BitmaxAPI.Assets assets = new BitmaxAPI.Assets();
             BitmaxClient bitmaxClient = new BitmaxClient();
 
             decimal answer = bitmaxClient.Market(assets.ETH, assets.BTC, AskOrBid);
@@ -50,7 +50,7 @@ namespace CryptoValue
 
         public async Task<decimal> ValueBitbank(string AskOrBid)
         {
-            BitbankLibrary.Assets assets = new BitbankLibrary.Assets();
+            BitbankAPI.Assets assets = new BitbankAPI.Assets();
             BitbankClient bitbankClient = new BitbankClient();
 
             decimal answer = bitbankClient.Market(assets.ETH, assets.BTC, AskOrBid);

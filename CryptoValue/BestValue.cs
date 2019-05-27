@@ -30,7 +30,6 @@ namespace CryptoValue
             return values;
         }
 
-
         public void SmallestHighest(string cases)
         {
             var values = CallMethods(cases);

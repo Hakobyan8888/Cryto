@@ -10,21 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Bitbank">
-      <HintPath>..\..\HuobiLibrary\Bitbank\bin\Debug\Bitbank.dll</HintPath>
-    </Reference>
-    <Reference Include="BitfinexLibrary">
-      <HintPath>..\..\HuobiLibrary\BitfinexLibrary\bin\Debug\BitfinexLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Bitforex">
-      <HintPath>..\..\HuobiLibrary\Bitforex\bin\Debug\Bitforex.dll</HintPath>
-    </Reference>
-    <Reference Include="BitmaxLibrary">
-      <HintPath>..\..\HuobiLibrary\BitmaxLibrary\bin\Debug\BitmaxLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Downloads\CryptoMarketApi-master\Api\HuobiApi\bin\Debug\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\BitbankAPI\BitbankAPI.csproj" />
+    <ProjectReference Include="..\BitfinexAPI\BitfinexAPI.csproj" />
+    <ProjectReference Include="..\BitforexAPI\BitforexAPI.csproj" />
+    <ProjectReference Include="..\BitmaxAPI\BitmaxAPI.csproj" />
   </ItemGroup>
 
 </Project>
