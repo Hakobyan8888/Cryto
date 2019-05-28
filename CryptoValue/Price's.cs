@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Binance;
-using BitbankAPI;
-using BitfinexAPI;
+using BitfinexApi;
 using BitforexAPI;
 using BitmaxAPI;
 
@@ -20,7 +19,7 @@ namespace CryptoValue
 
         public async Task<decimal> ValueBitfinex(string AskOrBid)
         {
-            BitfinexAPI.Assets assets = new BitfinexAPI.Assets();
+            BitfinexApi.Assets assets = new BitfinexApi.Assets();
             Tickers bitfinexClient = new Tickers();
 
             decimal answer = bitfinexClient.Market(assets.ETH, assets.BTC, AskOrBid);
@@ -47,16 +46,5 @@ namespace CryptoValue
             Console.WriteLine($"Bitmax is {AskOrBid} {answer}");
             return answer;
         }
-
-        public async Task<decimal> ValueBitbank(string AskOrBid)
-        {
-            BitbankAPI.Assets assets = new BitbankAPI.Assets();
-            BitbankClient bitbankClient = new BitbankClient();
-
-            decimal answer = bitbankClient.Market(assets.ETH, assets.BTC, AskOrBid);
-            Console.WriteLine($"Bitbank is {AskOrBid} {answer}");
-            return answer;
-        }
-
     }
 }

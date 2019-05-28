@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BitbankAPI\BitbankAPI.csproj" />
     <ProjectReference Include="..\BitfinexAPI\BitfinexAPI.csproj" />
     <ProjectReference Include="..\BitforexAPI\BitforexAPI.csproj" />
     <ProjectReference Include="..\BitmaxAPI\BitmaxAPI.csproj" />
