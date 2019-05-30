@@ -35,10 +35,6 @@ namespace CryptoValue
 
                 if (exchanges.Checker(suspectedProfit) > 0)
                 {
-                    //bank1.BuyBTC(best.MaxBid);
-                    //bank2.BuyETH(best.MinAsk);
-                    //bank1.SendMoney(bank2);
-                    //bank2.SendMoney(bank1);
                     switch (best.MinUrl)
                     {
                         case "Binance":
@@ -48,10 +44,7 @@ namespace CryptoValue
                             Console.WriteLine(bitfinexApiV1.ExecuteBuyOrder(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket));
                             break;
                         case "Bitforex":
-                            break;
-                        case "Bitmax":
-                            break;
-                        case "Bitbank":
+                            buySell.Bitforex("buy");
                             break;
                     }
                     switch (best.MaxUrl)
@@ -63,10 +56,7 @@ namespace CryptoValue
                             Console.WriteLine(bitfinexApiV1.ExecuteSellOrder(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket));
                             break;
                         case "Bitforex":
-                            break;
-                        case "Bitmax":
-                            break;
-                        case "Bitbank":
+                            buySell.Bitforex("sell");
                             break;
                     }
                 }

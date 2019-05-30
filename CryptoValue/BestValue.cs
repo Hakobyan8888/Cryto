@@ -24,8 +24,6 @@ namespace CryptoValue
             values.Add(Tuple.Create(await price.ValueBinance(), "Binance"));
             values.Add(Tuple.Create(await price.ValueBitfinex(cases), "Bitfinex"));
             values.Add(Tuple.Create(await price.ValueBitforex(cases), "Bitforex"));
-            values.Add(Tuple.Create(await price.ValueBitmax(cases), "Bitmax"));
-            values.Add(Tuple.Create(await price.ValueBitbank(cases), "Bitbank"));
 
             return values;
         }

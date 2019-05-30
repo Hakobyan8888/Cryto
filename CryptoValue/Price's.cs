@@ -37,14 +37,5 @@ namespace CryptoValue
             return answer;
         }
 
-        public async Task<decimal> ValueBitmax(string AskOrBid)
-        {
-            BitmaxAPI.Assets assets = new BitmaxAPI.Assets();
-            BitmaxClient bitmaxClient = new BitmaxClient();
-
-            decimal answer = bitmaxClient.Market(assets.ETH, assets.BTC, AskOrBid);
-            Console.WriteLine($"Bitmax is {AskOrBid} {answer}");
-            return answer;
-        }
     }
 }

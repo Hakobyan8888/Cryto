@@ -9,6 +9,19 @@ namespace BitforexAPI
 {
     public class BitforexClient
     {
+        internal string AccessKey { get; set; }
+        internal string SecretKey { get; set; }
+        NewOrder newOrder = new NewOrder();
+
+        public BitforexClient() { }
+
+
+        public BitforexClient(string accessKey, string secretKey)
+        {
+            this.AccessKey = accessKey;
+            this.SecretKey = secretKey;
+        }
+
         public decimal Market(string FirstCrypto, string SecondCrypto, string AskOrBid)
         {
             decimal value = 0;
@@ -34,6 +47,12 @@ namespace BitforexAPI
             }
             return value;
         }
+
+        public void ExecuteOrder(string FirstCrypto, string SecondCrypto, string AskOrBid, decimal price, decimal amount, int tradeType)
+        {
+            newOrder.Buy(FirstCrypto, SecondCrypto, AskOrBid, price, amount, tradeType, AccessKey, SecretKey);
+        }
+
     }
 
 }

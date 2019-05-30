@@ -1,6 +1,7 @@
 ﻿using System;
 using Binance;
 using System.Threading.Tasks;
+using BitforexAPI;
 
 namespace CryptoValue
 {
@@ -61,17 +62,21 @@ namespace CryptoValue
                 }
             }
         }
-        public void Bitbank()
-        {
 
-        }
-        public void Bitforex()
+        public void Bitforex(string BuySell)
         {
-
-        }
-        public void Bitmax()
-        {
-
+            Assets assets = new Assets();
+            var user = new BitforexClient("yIruCEm5k2TkExflzSf183xBp4HUt66G2BDx6WJqlL7HATRyJmcgp5UAiqYl0XsF", "BEqWhtDUPDIpNmaHFxA5ZhXLElcS74oal6yHLEx5sbE5gu46EsYLAfWAx1veyUr0");
+            Console.WriteLine("Successfull");
+            switch (BuySell)
+            {
+                case "buy":
+                    user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 1);
+                    break;
+                case "sell":
+                    user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 2);
+                    break;
+            }
         }
     }
 }
