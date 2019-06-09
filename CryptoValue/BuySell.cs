@@ -1,13 +1,13 @@
 ﻿using System;
-using Binance;
 using System.Threading.Tasks;
+using Binance;
 using BitforexAPI;
 
 namespace CryptoValue
 {
     class BuySell
     {
-        public async Task Binance(string buy)
+        public async Task BinanceBuySell(string buy)
         {
             var api = new BinanceApi();
             if (await api.PingAsync())
@@ -22,7 +22,7 @@ namespace CryptoValue
                             var clientOrder = new MarketOrder(user)
                             {
                                 Symbol = Symbol.ETH_BTC,
-                                Side = OrderSide.Buy,
+                                Side = Binance.OrderSide.Buy,
                                 Quantity = 1m
                             };
 
@@ -44,7 +44,7 @@ namespace CryptoValue
                             var clientOrder = new MarketOrder(user)
                             {
                                 Symbol = Symbol.ETH_BTC,
-                                Side = OrderSide.Sell,
+                                Side = Binance.OrderSide.Sell,
                                 Quantity = 1m
                             };
 
@@ -77,6 +77,11 @@ namespace CryptoValue
                     user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 2);
                     break;
             }
+        }
+
+        public void Bitfinex(string BuySell)
+        {
+            
         }
     }
 }

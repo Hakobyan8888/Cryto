@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using BitfinexApi;
 
@@ -38,7 +36,8 @@ namespace CryptoValue
                     switch (best.MinUrl)
                     {
                         case "Binance":
-                            buySell.Binance("buy").Wait();
+                            buySell.BinanceBuySell("buy").Wait();
+
                             break;
                         case "Bitfinex":
                             Console.WriteLine(bitfinexApiV1.ExecuteBuyOrder(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket));
@@ -50,7 +49,7 @@ namespace CryptoValue
                     switch (best.MaxUrl)
                     {
                         case "Binance":
-                            buySell.Binance("sell").Wait();
+                            buySell.BinanceBuySell("sell").Wait();
                             break;
                         case "Bitfinex":
                             Console.WriteLine(bitfinexApiV1.ExecuteSellOrder(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket));

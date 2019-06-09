@@ -31,6 +31,10 @@ namespace BitfinexApi
             this.Key = key;
         }
 
+        public BitfinexApiV1()
+        {
+        }
+
         private String GetHexString(byte[] bytes)
         {
             StringBuilder sb = new StringBuilder(bytes.Length * 2);
