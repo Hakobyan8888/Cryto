@@ -19,7 +19,7 @@ namespace CryptoValue
 
         public async Task<decimal> ValueBitfinex(string AskOrBid)
         {
-            BitfinexApi.Assets assets = new BitfinexApi.Assets();
+            BitfinexApi.BitfinexAssets assets = new BitfinexApi.BitfinexAssets();
             Tickers bitfinexClient = new Tickers();
 
             decimal answer = bitfinexClient.Market(assets.ETH, assets.BTC, AskOrBid);

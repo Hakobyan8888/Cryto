@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Binance;
 using BitforexAPI;
+using BitfinexApi;
 
 namespace CryptoValue
 {
@@ -35,11 +36,25 @@ namespace CryptoValue
                             {
                                 Console.WriteLine($"TEST Order Failed: \"{e.Message}\"");
                             }
+                            WithdrawRequest withdrawRequest = new WithdrawRequest(user)
+                            {
+                                Address = "",
+                                Amount = 2,
+                                Asset = Asset.ETH,
+                            };
+                            await api.WithdrawAsync(withdrawRequest);
+
                         }
                         break;
                     case "sell":
                         using (var user = new BinanceApiUser("yIruCEm5k2TkExflzSf183xBp4HUt66G2BDx6WJqlL7HATRyJmcgp5UAiqYl0XsF", "BEqWhtDUPDIpNmaHFxA5ZhXLElcS74oal6yHLEx5sbE5gu46EsYLAfWAx1veyUr0"))
                         {
+                            WithdrawRequest withdrawRequest = new WithdrawRequest(user)
+                            {
+                                Address = "",
+                                Amount = 2,
+                                Asset = Asset.BTC,
+                            };
                             // Create a client (MARKET) order.
                             var clientOrder = new MarketOrder(user)
                             {
@@ -57,6 +72,7 @@ namespace CryptoValue
                             {
                                 Console.WriteLine($"TEST Order Failed: \"{e.Message}\"");
                             }
+                            await api.WithdrawAsync(withdrawRequest);
                         }
                         break;
                 }
@@ -71,17 +87,28 @@ namespace CryptoValue
             switch (BuySell)
             {
                 case "buy":
-                    user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 1);
+                    user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 2);
                     break;
                 case "sell":
-                    user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 2);
+                    user.ExecuteOrder(assets.ETH, assets.BTC, "sell", 1000, 1, 2);
                     break;
             }
         }
 
         public void Bitfinex(string BuySell)
         {
-            
+            BitfinexAssets assets = new BitfinexAssets();
+            var user = new BitfinexApiV1("yIruCEm5k2TkExflzSf183xBp4HUt66G2BDx6WJqlL7HATRyJmcgp5UAiqYl0XsF", "BEqWhtDUPDIpNmaHFxA5ZhXLElcS74oal6yHLEx5sbE5gu46EsYLAfWAx1veyUr0");
+            Console.WriteLine("Successfull");
+            switch (BuySell)
+            {
+                case "buy":
+                    user.ExecuteBuyOrder(1000, 1, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, BitfinexApi.OrderType.MarginMarket);
+                    break;
+                case "sell":
+                    user.ExecuteSellOrder(1000, 1, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, BitfinexApi.OrderType.MarginMarket);
+                    break;
+            }
         }
     }
 }

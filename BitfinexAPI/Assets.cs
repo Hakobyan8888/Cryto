@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BitfinexApi
 {
-    public class Assets
+    public class BitfinexAssets
     {
         public string BTC { get; } = "btc";
         public string ETH { get; } = "eth";
