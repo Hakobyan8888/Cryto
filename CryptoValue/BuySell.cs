@@ -8,13 +8,13 @@ namespace CryptoValue
 {
     class BuySell
     {
-        public async Task BinanceBuySell(string buy)
+        public async Task BinanceBuySell(string BuyOrSell)
         {
             var api = new BinanceApi();
             if (await api.PingAsync())
             {
                 Console.WriteLine("Successfull");
-                switch (buy)
+                switch (BuyOrSell)
                 {
                     case "buy":
                         using (var user = new BinanceApiUser("yIruCEm5k2TkExflzSf183xBp4HUt66G2BDx6WJqlL7HATRyJmcgp5UAiqYl0XsF", "BEqWhtDUPDIpNmaHFxA5ZhXLElcS74oal6yHLEx5sbE5gu46EsYLAfWAx1veyUr0"))
@@ -79,34 +79,34 @@ namespace CryptoValue
             }
         }
 
-        public void Bitforex(string BuySell)
+        public async Task Bitforex(string BuyOrSell)
         {
             Assets assets = new Assets();
             var user = new BitforexClient("yIruCEm5k2TkExflzSf183xBp4HUt66G2BDx6WJqlL7HATRyJmcgp5UAiqYl0XsF", "BEqWhtDUPDIpNmaHFxA5ZhXLElcS74oal6yHLEx5sbE5gu46EsYLAfWAx1veyUr0");
             Console.WriteLine("Successfull");
-            switch (BuySell)
+            switch (BuyOrSell)
             {
                 case "buy":
-                    user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 2);
+                    await user.ExecuteOrder(assets.ETH, assets.BTC, "ask", 1000, 1, 2);
                     break;
                 case "sell":
-                    user.ExecuteOrder(assets.ETH, assets.BTC, "sell", 1000, 1, 2);
+                    await user.ExecuteOrder(assets.ETH, assets.BTC, "sell", 1000, 1, 2);
                     break;
             }
         }
 
-        public void Bitfinex(string BuySell)
+        public async Task Bitfinex(string BuyOrSell)
         {
             BitfinexAssets assets = new BitfinexAssets();
             var user = new BitfinexApiV1("yIruCEm5k2TkExflzSf183xBp4HUt66G2BDx6WJqlL7HATRyJmcgp5UAiqYl0XsF", "BEqWhtDUPDIpNmaHFxA5ZhXLElcS74oal6yHLEx5sbE5gu46EsYLAfWAx1veyUr0");
             Console.WriteLine("Successfull");
-            switch (BuySell)
+            switch (BuyOrSell)
             {
                 case "buy":
-                    user.ExecuteBuyOrder(1000, 1, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, BitfinexApi.OrderType.MarginMarket);
+                    await user.ExecuteBuyOrderAsync(1000, 1, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, BitfinexApi.OrderType.MarginMarket);
                     break;
                 case "sell":
-                    user.ExecuteSellOrder(1000, 1, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, BitfinexApi.OrderType.MarginMarket);
+                    await user.ExecuteSellOrderAsync(1000, 1, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, BitfinexApi.OrderType.MarginMarket);
                     break;
             }
         }

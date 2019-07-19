@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Binance;
 using BitfinexApi;
 using BitforexAPI;
-using BitmaxAPI;
 
 namespace CryptoValue
 {
@@ -22,7 +21,7 @@ namespace CryptoValue
             BitfinexApi.BitfinexAssets assets = new BitfinexApi.BitfinexAssets();
             Tickers bitfinexClient = new Tickers();
 
-            decimal answer = bitfinexClient.Market(assets.ETH, assets.BTC, AskOrBid);
+            decimal answer = await bitfinexClient.Market(assets.ETH, assets.BTC, AskOrBid);
             Console.WriteLine($"Bitfinex is {AskOrBid} {answer}");
             return answer;
         }
@@ -32,7 +31,7 @@ namespace CryptoValue
             BitforexAPI.Assets assets = new BitforexAPI.Assets();
             BitforexClient bitforexClient = new BitforexClient();
 
-            decimal answer = bitforexClient.Market(assets.ETH, assets.BTC, AskOrBid);
+            decimal answer = await bitforexClient.MarketAsync(assets.ETH, assets.BTC, AskOrBid);
             Console.WriteLine($"Bitforex is {AskOrBid} {answer}");
             return answer;
         }

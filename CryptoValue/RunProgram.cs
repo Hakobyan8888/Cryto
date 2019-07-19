@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using BitfinexApi;
 
 namespace CryptoValue
@@ -14,7 +15,7 @@ namespace CryptoValue
         BitfinexApiV1 bitfinexApiV1 = new BitfinexApiV1("qGG4G9RNeqKx56s0J5bSjl3EYUwGsIBa3to6hKiVCtj", "AYICh3OUrI0Pry9QeplPC7zZWPS0UUlEQP4MSUKYmac");
         BuySell buySell = new BuySell();
 
-        public void Start()
+        public async Task StartAsync()
         {
             while (true)
             {
@@ -36,14 +37,14 @@ namespace CryptoValue
                     switch (best.MinUrl)
                     {
                         case "Binance":
-                            buySell.BinanceBuySell("buy").Wait();
+                            await buySell.BinanceBuySell("buy");
 
                             break;
                         case "Bitfinex":
-                            Console.WriteLine(bitfinexApiV1.ExecuteBuyOrder(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket));
+                            await bitfinexApiV1.ExecuteBuyOrderAsync(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket);
                             break;
                         case "Bitforex":
-                            buySell.Bitforex("buy");
+                            await buySell.Bitforex("buy");
                             break;
                     }
                     switch (best.MaxUrl)
@@ -52,10 +53,10 @@ namespace CryptoValue
                             buySell.BinanceBuySell("sell").Wait();
                             break;
                         case "Bitfinex":
-                            Console.WriteLine(bitfinexApiV1.ExecuteSellOrder(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket));
+                            await bitfinexApiV1.ExecuteSellOrderAsync(0.01m, 100, OrderExchange.Bitfinex, OrderSymbol.ETHBTC, OrderType.MarginMarket);
                             break;
                         case "Bitforex":
-                            buySell.Bitforex("sell");
+                            await buySell.Bitforex("sell");
                             break;
                     }
                 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BitforexAPI
 {
@@ -22,13 +23,14 @@ namespace BitforexAPI
             this.SecretKey = secretKey;
         }
 
-        public decimal Market(string FirstCrypto, string SecondCrypto, string AskOrBid)
+        public async Task<decimal> MarketAsync(string FirstCrypto, string SecondCrypto, string AskOrBid)
         {
             decimal value = 0;
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://api.bitforex.com/api/v1/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync($"market/ticker?symbol=coin-{SecondCrypto}-{FirstCrypto}").Result;
+            HttpResponseMessage response = await client.GetAsync($"market/ticker?symbol=coin-{SecondCrypto}-{FirstCrypto}");
+
             if (response.IsSuccessStatusCode && AskOrBid == "ask")
             {
                 var products = response.Content.ReadAsStringAsync().Result;
@@ -48,9 +50,9 @@ namespace BitforexAPI
             return value;
         }
 
-        public void ExecuteOrder(string FirstCrypto, string SecondCrypto, string AskOrBid, decimal price, decimal amount, int tradeType)
+        public async Task ExecuteOrder(string FirstCrypto, string SecondCrypto, string AskOrBid, decimal price, decimal amount, int tradeType)
         {
-            newOrder.Buy(FirstCrypto, SecondCrypto, AskOrBid, price, amount, tradeType, AccessKey, SecretKey);
+            await newOrder.Buy(FirstCrypto, SecondCrypto, AskOrBid, price, amount, tradeType, AccessKey, SecretKey);
         }
 
     }

@@ -8,7 +8,7 @@ namespace CryptoValue
         static void Main(string[] args)
         {
             RunProgram runProgram = new RunProgram();
-            runProgram.Start();
+            runProgram.StartAsync();
         }
     }
 }

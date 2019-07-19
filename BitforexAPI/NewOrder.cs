@@ -11,7 +11,7 @@ namespace BitforexAPI
     {
         HttpResponseMessage response = null;
 
-        internal void Buy(string FirstCrypto, string SecondCrypto, string AskOrBid,decimal price, decimal amount, int tradeType, string accessKey, string secretKey)
+        internal async Task Buy(string FirstCrypto, string SecondCrypto, string AskOrBid,decimal price, decimal amount, int tradeType, string accessKey, string secretKey)
         {
             long nonce = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             string signedKey = ComputeSha256Hash(secretKey);
@@ -20,7 +20,7 @@ namespace BitforexAPI
             client.BaseAddress = new Uri("https://api.bitforex.com/api/v1/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             response.EnsureSuccessStatusCode();
-            response = client.GetAsync($"trade/placeOrder?accessKey={accessKey}&amount={amount}&nonce={nonce}&price={price}&symbol=coin-{SecondCrypto}-{FirstCrypto}&tradeType={tradeType}&signData={signedKey}").Result;
+            response = await client.GetAsync($"trade/placeOrder?accessKey={accessKey}&amount={amount}&nonce={nonce}&price={price}&symbol=coin-{SecondCrypto}-{FirstCrypto}&tradeType={tradeType}&signData={signedKey}");
             Console.WriteLine(response);
         }
 

@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using Newtonsoft.Json;
 using System.Net;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BitfinexApi
 {
@@ -44,63 +45,63 @@ namespace BitfinexApi
             }
             return sb.ToString();
         }
-        public BalancesResponse GetBalances()
+        public async Task<BalancesResponse> GetBalancesAsync()
         {
             BalancesRequest req = new BalancesRequest(Nonce);
-            string response = SendRequest(req,"GET");
+            string response = await SendRequestAsync(req,"GET");
             BalancesResponse resp = BalancesResponse.FromJSON(response);
 
             return resp;
         }
-        public CancelOrderResponse CancelOrder(int order_id)
+        public async Task<CancelOrderResponse> CancelOrderAsync(int order_id)
         {
             CancelOrderRequest req = new CancelOrderRequest(Nonce, order_id);
-            string response = SendRequest(req,"POST");
+            string response = await SendRequestAsync(req,"POST");
             CancelOrderResponse resp = CancelOrderResponse.FromJSON(response);
             return resp;
         }
-        public CancelAllOrdersResponse CancelAllOrders()
+        public async Task<CancelAllOrdersResponse> CancelAllOrdersAsync()
         {
             CancelAllOrdersRequest req = new CancelAllOrdersRequest(Nonce);
-            string response = SendRequest(req,"GET");
+            string response = await SendRequestAsync(req,"GET");
             return new CancelAllOrdersResponse(response);
         }
-        public OrderStatusResponse GetOrderStatus(int order_id)
+        public async Task<OrderStatusResponse> GetOrderStatusAsync(int order_id)
         {
             OrderStatusRequest req = new OrderStatusRequest(Nonce, order_id);
-            string response = SendRequest(req, "POST");
+            string response = await SendRequestAsync(req, "POST");
             return OrderStatusResponse.FromJSON(response);
         }
-        public ActiveOrdersResponse GetActiveOrders()
+        public async Task<ActiveOrdersResponse> GetActiveOrdersAsync()
         {
             ActiveOrdersRequest req = new ActiveOrdersRequest(Nonce);
-            string response = SendRequest(req, "POST");
+            string response = await SendRequestAsync(req, "POST");
             return ActiveOrdersResponse.FromJSON(response);
         }
-        public ActivePositionsResponse GetActivePositions()
+        public async Task<ActivePositionsResponse> GetActivePositionsAsync()
         {
             ActivePositionsRequest req = new ActivePositionsRequest(Nonce);
-            string response = SendRequest(req, "POST");
+            string response = await SendRequestAsync(req, "POST");
             return ActivePositionsResponse.FromJSON(response);
         }
 
-        public NewOrderResponse ExecuteBuyOrder(decimal amount, decimal price, OrderExchange exchange, OrderSymbol symbol, OrderType type)
+        public async Task<NewOrderResponse> ExecuteBuyOrderAsync(decimal amount, decimal price, OrderExchange exchange, OrderSymbol symbol, OrderType type)
         {
-            return ExecuteOrder(amount, price, exchange, symbol, OrderSide.Buy, type);
+            return await ExecuteOrder(amount, price, exchange, symbol, OrderSide.Buy, type);
         }
-        public NewOrderResponse ExecuteSellOrder(decimal amount, decimal price, OrderExchange exchange, OrderSymbol symbol, OrderType type)
+        public async Task<NewOrderResponse> ExecuteSellOrderAsync(decimal amount, decimal price, OrderExchange exchange, OrderSymbol symbol, OrderType type)
         {
-            return ExecuteOrder(amount, price, exchange, symbol, OrderSide.Sell, type);
+            return await ExecuteOrder(amount, price, exchange, symbol, OrderSide.Sell, type);
         }
-        public NewOrderResponse ExecuteOrder(decimal amount, decimal price, OrderExchange exchange, OrderSymbol symbol, OrderSide side, OrderType type)
+        public async Task<NewOrderResponse> ExecuteOrder(decimal amount, decimal price, OrderExchange exchange, OrderSymbol symbol, OrderSide side, OrderType type)
         {
             NewOrderRequest req = new NewOrderRequest(Nonce, symbol, amount, price, exchange, side, type);
-            string response = SendRequest(req,"POST");
+            string response = await SendRequestAsync(req,"POST");
             NewOrderResponse resp = NewOrderResponse.FromJSON(response);
             return resp;
         }
 
-        private string SendRequest(GenericRequest request,string httpMethod)
+        private async Task<string> SendRequestAsync(GenericRequest request,string httpMethod)
         {
             string json = JsonConvert.SerializeObject(request);
             string json64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
@@ -119,7 +120,7 @@ namespace BitfinexApi
             {
                 HttpWebResponse resp = wr.GetResponse() as HttpWebResponse;
                 StreamReader sr = new StreamReader(resp.GetResponseStream());
-                response = sr.ReadToEnd();
+                response = await sr.ReadToEndAsync();
                 sr.Close();
             }
             catch (WebException ex)
